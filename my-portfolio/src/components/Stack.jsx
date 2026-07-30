@@ -13,12 +13,14 @@ const techStack = [
 
 const Stack = () => {
   return (
-    <div className="flex flex-col flex-2 h-fit w-screen">
-      <div className="w-screen h-0.5 bg-emerald-300"></div>
+    <div className="flex flex-col h-auto w-full">
+      <div className="text-3xl sm:text-4xl font-extrabold text-white text-center mb-8 tracking-tight">My Stack:</div>
+
+      <div className="w-full h-0.5 bg-emerald-300"></div>
+
       <div className="relative w-full overflow-hidden bg-slate-900 py-6">
-        {/*Gradient masks on left and right for a smooth fade effect */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-linear-to-r from-slate-900 to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-linear-to-l from-slate-900 to-transparent" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-slate-900 to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-slate-900 to-transparent" />
 
         {/* Animated Flex Container */}
         <div className="flex w-max animate-marquee gap-8 hover:[animation-play-state:paused]">
@@ -47,7 +49,8 @@ const Stack = () => {
           </div>
         </div>
       </div>
-      <div className="w-screen h-0.5 bg-emerald-300"></div>
+
+      <div className="w-full h-0.5 bg-emerald-300"></div>
     </div>
   );
 };
