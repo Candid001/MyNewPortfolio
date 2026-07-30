@@ -1,37 +1,21 @@
-import React, { useState, useRef } from 'react';
-import emailjs from '@emailjs/browser';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, CheckCircle2, AlertCircle } from 'lucide-react';
-
+import React from 'react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
 
 const Contact = () => {
-  const formRef = useRef();
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(null); // 'success' | 'error' | null
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setStatus(null);
+    const formData = new FormData(e.target);
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const subject = formData.get('subject');
+    const message = formData.get('message');
 
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_cn3vt8l', 
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_hdlzf8h', 
-        formRef.current,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'lfdQhAvRrnZNfDj4O' 
-      )
-      .then(
-        () => {
-          setLoading(false);
-          setStatus('success');
-          e.target.reset(); // Clean form reset
-        },
-        (error) => {
-          setLoading(false);
-          setStatus('error');
-          console.error('Email sending failed:', error);
-        }
-      );
+    // Simple mailto fallback
+    const mailtoLink = `mailto:abdulbasitmustapha1@gmail.com?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+
+    window.location.href = mailtoLink;
   };
 
   const contactInfo = [
@@ -137,7 +121,7 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div className="lg:col-span-2 bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-800">
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
@@ -174,7 +158,7 @@ const Contact = () => {
                 <input
                   type="text"
                   id="subject"
-                  name="title"
+                  name="subject"
                   required
                   className="w-full px-3.5 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-white placeholder-gray-500 text-sm sm:text-base focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors duration-200"
                   placeholder="What's this regarding?"
@@ -197,27 +181,11 @@ const Contact = () => {
 
               <button
                 type="submit"
-                disabled={loading}
-                className="w-full bg-emerald-400 hover:bg-emerald-500 disabled:bg-emerald-400/50 text-slate-950 font-semibold py-3.5 px-6 rounded-xl transition-all duration-200 shadow-lg shadow-emerald-500/10 flex items-center justify-center space-x-2 active:scale-[0.99] hover:scale-[1.01]"
+                className="w-full bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-semibold py-3.5 px-6 rounded-xl transition-all duration-200 shadow-lg shadow-emerald-500/10 flex items-center justify-center space-x-2 active:scale-[0.99] hover:scale-[1.01]"
               >
                 <Send className="h-5 w-5 stroke-[2.5]" />
-                <span>{loading ? 'Sending Message...' : 'Send Message'}</span>
+                <span>Send Message</span>
               </button>
-
-              {/* Status Notifications */}
-              {status === 'success' && (
-                <div className="flex items-center gap-2 p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-sm">
-                  <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
-                  <span>Your message has been sent successfully! I'll get back to you soon.</span>
-                </div>
-              )}
-
-              {status === 'error' && (
-                <div className="flex items-center gap-2 p-4 bg-rose-500/10 border border-rose-500/30 rounded-xl text-rose-400 text-sm">
-                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
-                  <span>Failed to send message. Please try again or reach out directly via email.</span>
-                </div>
-              )}
             </form>
           </div>
 
