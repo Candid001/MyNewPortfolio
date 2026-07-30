@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, CheckCircle2, AlertCircle } from 'lucide-react';
 
+
 const Contact = () => {
   const formRef = useRef();
   const [loading, setLoading] = useState(false);
