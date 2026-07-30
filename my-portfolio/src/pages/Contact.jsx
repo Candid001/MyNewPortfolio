@@ -1,12 +1,33 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 const socialLinks = [
   { icon: FaGithub, label: 'GitHub', href: 'https://github.com/Candid001', color: 'hover:text-emerald-300' },
   { icon: FaLinkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/mustapha-abdulbasit-339912168/', color: 'hover:text-emerald-300' },
   { icon: FaTwitter, label: 'Twitter', href: 'https://x.com/basit_la', color: 'hover:text-emerald-300' }
+];
+
+const contactInfo = [
+  {
+    icon: Mail,
+    label: 'Email',
+    value: 'abdulbasitmustapha1@gmail.com',
+    href: 'mailto:abdulbasitmustapha1@gmail.com'
+  },
+  {
+    icon: Phone,
+    label: 'Phone',
+    value: '+49 1521 4990703',
+    href: 'tel:+4915214990703'
+  },
+  {
+    icon: MapPin,
+    label: 'Location',
+    value: 'Trier, Germany',
+    href: '#'
+  }
 ];
 
 const Contact = () => {
@@ -39,48 +60,6 @@ const Contact = () => {
         }
       );
   };
-
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: 'Email',
-      value: 'abdulbasitmustapha1@gmail.com',
-      href: 'mailto:abdulbasitmustapha1@gmail.com'
-    },
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: '+49 1521 4990703',
-      href: 'tel:+4915214990703'
-    },
-    {
-      icon: MapPin,
-      label: 'Location',
-      value: 'Trier, Germany',
-      href: '#'
-    }
-  ];
-
-  const socialLinks = [
-    {
-      icon: Github,
-      label: 'GitHub',
-      href: 'https://github.com/Candid001',
-      color: 'hover:text-emerald-300'
-    },
-    {
-      icon: Linkedin,
-      label: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/mustapha-abdulbasit-339912168/',
-      color: 'hover:text-emerald-300'
-    },
-    {
-      icon: Twitter,
-      label: 'Twitter',
-      href: 'https://x.com/basit_la',
-      color: 'hover:text-emerald-300'
-    }
-  ];
 
   return (
     <section id="contact" className="py-16 sm:py-24 w-full">
