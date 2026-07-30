@@ -7,38 +7,23 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null); // 'success' | 'error' | null
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     setStatus(null);
 
-    // Replace YOUR_TEMPLATE_ID and YOUR_PUBLIC_KEY with your actual credentials
     emailjs
       .sendForm(
-        'service_cn3vt8l', 
-        'template_hdlzf8h', 
+        import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_cn3vt8l', 
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_hdlzf8h', 
         formRef.current,
-        'lfdQhAvRrnZNfDj4O' 
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'lfdQhAvRrnZNfDj4O' 
       )
       .then(
-        (result) => {
+        () => {
           setLoading(false);
           setStatus('success');
-          setFormData({ name: '', email: '', subject: '', message: '' });
+          e.target.reset(); // Clean form reset
         },
         (error) => {
           setLoading(false);
@@ -161,8 +146,6 @@ const Contact = () => {
                     type="text"
                     id="name"
                     name="name"
-                    value={formData.name}
-                    onChange={handleChange}
                     required
                     className="w-full px-3.5 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-white placeholder-gray-500 text-sm sm:text-base focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors duration-200"
                     placeholder="Your Name"
@@ -176,8 +159,6 @@ const Contact = () => {
                     type="email"
                     id="email"
                     name="email"
-                    value={formData.email}
-                    onChange={handleChange}
                     required
                     className="w-full px-3.5 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-white placeholder-gray-500 text-sm sm:text-base focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors duration-200"
                     placeholder="your@email.com"
@@ -192,9 +173,7 @@ const Contact = () => {
                 <input
                   type="text"
                   id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
+                  name="title"
                   required
                   className="w-full px-3.5 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-white placeholder-gray-500 text-sm sm:text-base focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors duration-200"
                   placeholder="What's this regarding?"
@@ -208,8 +187,6 @@ const Contact = () => {
                 <textarea
                   id="message"
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
                   required
                   rows={5}
                   className="w-full px-3.5 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-white placeholder-gray-500 text-sm sm:text-base focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors duration-200 resize-none"
