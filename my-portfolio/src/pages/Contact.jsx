@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, CheckCircle2, AlertCircle } from 'lucide-react';
 
 const Contact = () => {
+  const formRef = useRef();
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(null); // 'success' | 'error' | null
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -9,19 +14,38 @@ const Contact = () => {
     message: ''
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic or API here
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({ name: '', email: '', subject: '', message: '' });
-  };
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus(null);
+
+    // Replace YOUR_TEMPLATE_ID and YOUR_PUBLIC_KEY with your actual credentials
+    emailjs
+      .sendForm(
+        'service_cn3vt8l', 
+        'template_hdlzf8h', 
+        formRef.current,
+        'lfdQhAvRrnZNfDj4O' 
+      )
+      .then(
+        (result) => {
+          setLoading(false);
+          setStatus('success');
+          setFormData({ name: '', email: '', subject: '', message: '' });
+        },
+        (error) => {
+          setLoading(false);
+          setStatus('error');
+          console.error('Email sending failed:', error);
+        }
+      );
   };
 
   const contactInfo = [
@@ -34,8 +58,8 @@ const Contact = () => {
     {
       icon: Phone,
       label: 'Phone',
-      value: '+4915214990703',
-      href: '+4915214990703'
+      value: '+49 1521 4990703',
+      href: 'tel:+4915214990703'
     },
     {
       icon: MapPin,
@@ -67,11 +91,11 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 w-full">
+    <section id="contact" className="py-16 sm:py-24 w-full">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Get In Touch
           </h2>
@@ -82,10 +106,10 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           
           {/* Contact Information Sidebar */}
-          <div className="lg:col-span-1 p-6 sm:p-8 rounded-2xl">
+          <div className="lg:col-span-1 bg-slate-900/40 border border-slate-800 p-6 sm:p-8 rounded-2xl">
             <h3 className="text-xl font-bold text-white mb-6">Contact Information</h3>
             
             <div className="space-y-4 mb-8">
@@ -95,19 +119,19 @@ const Contact = () => {
                   href={info.href}
                   className="flex items-center space-x-4 text-gray-300 hover:text-white transition-all duration-200 p-3 rounded-xl hover:bg-slate-800/80 group"
                 >
-                  <div className="p-3 bg-slate-800 rounded-lg text-emerald-400 border border-slate-700 group-hover:border-emerald-500/50 transition-colors">
+                  <div className="p-3 bg-slate-800 rounded-lg text-emerald-400 border border-slate-700 group-hover:border-emerald-500/50 transition-colors flex-shrink-0">
                     <info.icon className="h-5 w-5" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <div className="text-xs text-gray-400 font-mono">{info.label}</div>
-                    <div className="font-medium text-sm sm:text-base">{info.value}</div>
+                    <div className="font-medium text-sm sm:text-base truncate">{info.value}</div>
                   </div>
                 </a>
               ))}
             </div>
 
             <div className="pt-6 border-t border-slate-800">
-              <h4 className="text-sm font-semibold text-gray-300 mb-4 font-mono">CONNECT WITH ME</h4>
+              <h4 className="text-xs font-semibold text-gray-400 mb-4 font-mono tracking-wider">CONNECT WITH ME</h4>
               <div className="flex space-x-3">
                 {socialLinks.map((social, index) => (
                   <a
@@ -127,8 +151,8 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div className="lg:col-span-2 bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-800">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                     Name
@@ -140,7 +164,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors duration-200"
+                    className="w-full px-3.5 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-white placeholder-gray-500 text-sm sm:text-base focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors duration-200"
                     placeholder="Your Name"
                   />
                 </div>
@@ -155,7 +179,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors duration-200"
+                    className="w-full px-3.5 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-white placeholder-gray-500 text-sm sm:text-base focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors duration-200"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -172,7 +196,7 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors duration-200"
+                  className="w-full px-3.5 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-white placeholder-gray-500 text-sm sm:text-base focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors duration-200"
                   placeholder="What's this regarding?"
                 />
               </div>
@@ -188,18 +212,34 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors duration-200 resize-none"
+                  className="w-full px-3.5 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-white placeholder-gray-500 text-sm sm:text-base focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors duration-200 resize-none"
                   placeholder="Tell me about your project or inquiry..."
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-semibold py-3.5 px-6 rounded-xl transition-all duration-200 shadow-lg shadow-emerald-500/10 flex items-center justify-center space-x-2 hover:scale-[1.01]"
+                disabled={loading}
+                className="w-full bg-emerald-400 hover:bg-emerald-500 disabled:bg-emerald-400/50 text-slate-950 font-semibold py-3.5 px-6 rounded-xl transition-all duration-200 shadow-lg shadow-emerald-500/10 flex items-center justify-center space-x-2 active:scale-[0.99] hover:scale-[1.01]"
               >
                 <Send className="h-5 w-5 stroke-[2.5]" />
-                <span>Send Message</span>
+                <span>{loading ? 'Sending Message...' : 'Send Message'}</span>
               </button>
+
+              {/* Status Notifications */}
+              {status === 'success' && (
+                <div className="flex items-center gap-2 p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-sm">
+                  <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                  <span>Your message has been sent successfully! I'll get back to you soon.</span>
+                </div>
+              )}
+
+              {status === 'error' && (
+                <div className="flex items-center gap-2 p-4 bg-rose-500/10 border border-rose-500/30 rounded-xl text-rose-400 text-sm">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                  <span>Failed to send message. Please try again or reach out directly via email.</span>
+                </div>
+              )}
             </form>
           </div>
 

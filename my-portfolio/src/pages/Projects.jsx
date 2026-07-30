@@ -66,11 +66,11 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 w-full">
+    <section id="projects" className="py-16 sm:py-24 w-full">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Featured Projects
           </h2>
@@ -82,7 +82,7 @@ const Projects = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {projects.map((project) => (
             <div
               key={project.id}
@@ -90,17 +90,15 @@ const Projects = () => {
             >
               <div>
                 {/* Image & Overlay Container */}
-                <div className="relative overflow-hidden h-60">
+                <div className="relative overflow-hidden h-48 sm:h-56 md:h-60">
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   
-                  {/* Subtle Gradient Overlay */}
-                  <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4 backdrop-blur-[2px]">
-                    
-                    {/* Live Link Button (Only renders if liveUrl exists) */}
+                  {/* Desktop Hover Overlay */}
+                  <div className="hidden sm:flex absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center space-x-4 backdrop-blur-[2px]">
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
@@ -113,7 +111,6 @@ const Projects = () => {
                       </a>
                     )}
 
-                    {/* GitHub Link Button */}
                     <a
                       href={project.githubUrl}
                       target="_blank"
@@ -127,40 +124,67 @@ const Projects = () => {
                 </div>
 
                 {/* Project Details */}
-                <div className="p-6 sm:p-8">
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+                <div className="p-5 sm:p-8">
+                  <h3 className="text-xl font-bold text-white mb-2 sm:mb-3 group-hover:text-emerald-300 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-6">
+                  <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-4 sm:mb-6">
                     {project.description}
                   </p>
                 </div>
               </div>
 
-              {/* Tags Section */}
-              <div className="px-6 pb-6 sm:px-8 sm:pb-8">
+              {/* Footer Section: Tags & Mobile Direct Links */}
+              <div className="px-5 pb-5 sm:px-8 sm:pb-8 flex flex-col gap-4">
+                
+                {/* Tech Tags */}
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="bg-slate-800 border border-slate-700 text-emerald-300 px-3 py-1 rounded-full font-mono text-xs font-medium"
+                      className="bg-slate-800 border border-slate-700 text-emerald-300 px-2.5 py-1 rounded-full font-mono text-xs font-medium"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
+
+                {/* Mobile Direct Action Buttons (Always visible on mobile) */}
+                <div className="flex sm:hidden items-center gap-3 pt-2 border-t border-slate-800/80">
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center gap-2 bg-emerald-400 text-slate-950 font-semibold text-xs py-2.5 px-3 rounded-xl"
+                    >
+                      <ExternalLink className="h-4 w-4 stroke-[2.5]" />
+                      <span>Live Demo</span>
+                    </a>
+                  )}
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 inline-flex items-center justify-center gap-2 bg-slate-800 text-white border border-slate-700 font-semibold text-xs py-2.5 px-3 rounded-xl"
+                  >
+                    <Github className="h-4 w-4" />
+                    <span>Code</span>
+                  </a>
+                </div>
+
               </div>
             </div>
           ))}
         </div>
 
         {/* Bottom CTA to GitHub */}
-        <div className="text-center mt-16">
+        <div className="text-center mt-12 sm:mt-16">
           <a
             href="https://github.com/Candid001?tab=repositories"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-3 bg-emerald-400 hover:bg-emerald-500 text-slate-950 px-8 py-3.5 rounded-xl font-semibold shadow-lg shadow-emerald-500/10 hover:scale-105 transition-all duration-200"
+            className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 bg-emerald-400 hover:bg-emerald-500 text-slate-950 px-8 py-3.5 rounded-xl font-semibold shadow-lg shadow-emerald-500/10 hover:scale-105 transition-all duration-200 text-sm sm:text-base"
           >
             <Github className="h-5 w-5" />
             <span>View All Repositories on GitHub</span>
