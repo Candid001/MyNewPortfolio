@@ -118,7 +118,7 @@ const Projects = () => {
                       aria-label="View GitHub Repository"
                       className="bg-slate-800 hover:bg-slate-700 text-white p-3.5 rounded-full transition-all duration-200 hover:scale-110 border border-slate-600 shadow-lg"
                     >
-                      <Github className="h-5 w-5" />
+                      <GitFork className="h-5 w-5" />
                     </a>
                   </div>
                 </div>
@@ -168,7 +168,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     className="flex-1 inline-flex items-center justify-center gap-2 bg-slate-800 text-white border border-slate-700 font-semibold text-xs py-2.5 px-3 rounded-xl"
                   >
-                    <Github className="h-4 w-4" />
+                    <GitFork className="h-4 w-4" />
                     <span>Code</span>
                   </a>
                 </div>
@@ -186,7 +186,7 @@ const Projects = () => {
             rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 bg-emerald-400 hover:bg-emerald-500 text-slate-950 px-8 py-3.5 rounded-xl font-semibold shadow-lg shadow-emerald-500/10 hover:scale-105 transition-all duration-200 text-sm sm:text-base"
           >
-            <Github className="h-5 w-5" />
+            <GitFork className="h-5 w-5" />
             <span>View All Repositories on GitHub</span>
           </a>
         </div>
