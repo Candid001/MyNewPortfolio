@@ -1,5 +1,5 @@
 import React from "react";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, GitFork } from "lucide-react";
 
 const Projects = () => {
   const projects = [
