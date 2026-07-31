@@ -12,7 +12,7 @@ function Home() {
     <div className="w-full overflow-x-hidden min-h-screen bg-gradient-to-b from-slate-50 via-white to-emerald-50/20 py-12 sm:py-20 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       
       {/* HERO SECTION */}
-      <section className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-16 pl-32">
+      <section className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-16 lg:pl-32">
         
         {/* Avatar Container */}
         <div className="relative shrink-0 ">
@@ -62,7 +62,7 @@ function Home() {
             <Button
               to="/projects"
               variant="outline"
-              className="hover:scale-105 text-sm sm:text-base py-2.5 px-6 border-slate-300 text-slate-800 hover:bg-slate-100 hover:border-slate-400 shadow-sm"
+              className="hover:scale-105 text-sm sm:text-base py-2.5 px-6 border-slate-300 text-black hover:bg-slate-100 hover:border-slate-400 shadow-sm"
             >
               View My Projects
             </Button>

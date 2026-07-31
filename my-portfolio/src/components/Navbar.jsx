@@ -5,9 +5,9 @@ import { ArrowDown, Menu, X } from "lucide-react";
 
 const links = [
   { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
+  { to: "/about", label: "About Me" },
   { to: "/projects", label: "Projects" },
-  { to: "/contact", label: "Contact" },
+  { to: "/contact", label: "Contact Me" },
 ];
 
 function Navbar() {
