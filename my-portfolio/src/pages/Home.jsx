@@ -5,15 +5,13 @@ import Stack from "../components/Stack";
 import MyApproach from "../components/MyApproach";
 import Experience from "../components/Experience";
 import CallToActionBanner from "../components/CallToActionBanner";
-import Basit from "../assets/OffBas.JPG"
+import Basit from "../assets/OffBas.JPG";
 
 function Home() {
   return (
     <div className="w-full overflow-x-hidden min-h-screen bg-gradient-to-b from-slate-50 via-white to-emerald-50/20 py-12 sm:py-20 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
-      
       {/* HERO SECTION */}
       <section className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-16 lg:pl-32">
-        
         {/* Avatar Container */}
         <div className="relative shrink-0 ">
           <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 border-2 border-emerald-500/30 overflow-hidden rounded-2xl shadow-xl shadow-emerald-900/10 bg-white">
@@ -32,7 +30,6 @@ function Home() {
 
         {/* Hero Text Content */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left">
-          
           {/* Status Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs sm:text-sm font-medium mb-4 shadow-sm">
             <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
@@ -53,8 +50,9 @@ function Home() {
 
           {/* Subtitle */}
           <p className="mt-3 text-slate-600 text-base sm:text-lg lg:text-xl max-w-xl font-normal">
-            Frontend Engineer <span className="text-emerald-600 font-semibold">||</span>{" "}
-            Project Manager
+            Frontend Engineer{" "}
+            <span className="text-emerald-600 font-semibold">||</span> Project
+            Manager
           </p>
 
           {/* Call To Action Buttons */}
@@ -62,7 +60,7 @@ function Home() {
             <Button
               to="/projects"
               variant="outline"
-              className="hover:scale-105 text-sm sm:text-base py-2.5 px-6 border-slate-300 text-black hover:bg-slate-100 hover:border-slate-400 shadow-sm"
+              className="hover:scale-105 text-sm sm:text-base py-2.5 px-6 border-slate-300 !text-black hover:bg-slate-100 hover:border-slate-400 shadow-sm"
             >
               View My Projects
             </Button>
