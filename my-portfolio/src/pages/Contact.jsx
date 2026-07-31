@@ -62,7 +62,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-24 w-full">
+    <section id="contact" className="py-16 sm:py-24 w-full bg-slate-900/60">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

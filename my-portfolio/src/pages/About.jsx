@@ -31,7 +31,7 @@ const About = () => {
           <div className="max-w-3xl w-full space-y-6 text-gray-300 text-base sm:text-lg leading-relaxed text-left sm:text-justify">
             <p className="bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
               I'm a passionate frontend engineer with production experience building 
-              scalable, user-centered digital web applications[cite: 1]. My journey began with a deep fascination for how clean code and intuitive design intersect to solve complex real-world problems.
+              scalable, user-centered digital web applications. My journey began with a deep fascination for how clean code and intuitive design intersect to solve complex real-world problems.
             </p>
             <p className="bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
               I specialize in <strong className="text-emerald-300 font-semibold">React, Next.js, and TypeScript</strong> along with modern CSS frameworks like <strong className="text-emerald-300 font-semibold">Tailwind CSS</strong>[cite: 1]. I enjoy architecting reusable component systems and collaborating with cross-functional teams to ship seamless B2B and consumer interfaces[cite: 1].
